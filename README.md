@@ -168,6 +168,17 @@ root project directory and will create a .jar file in the jar/ directory.
 
 Changelog
 ---------
+v1.0.14
+* fixed for each loops (via westnordost)
+* fixed array initialization (via westnordost)
+* fixed possible null pointer (via westnordost)
+* removed hardcoded Dictionary import (via westnordost)
+* can now compile directories via command line (via westnordost)
+* jar manifest cleaned up (via westnordost)
+
+v1.0.13
+* fixed String.length()
+
 v1.0.12
 * fixed a bug where cast expressions were being ignored in variable declarations during mutation pass
 
