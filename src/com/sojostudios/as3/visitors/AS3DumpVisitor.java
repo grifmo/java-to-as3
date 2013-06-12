@@ -1,10 +1,5 @@
 package com.sojostudios.as3.visitors;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.log4j.Logger;
-
 import japa.parser.ast.BlockComment;
 import japa.parser.ast.CompilationUnit;
 import japa.parser.ast.ImportDeclaration;
@@ -92,6 +87,11 @@ import japa.parser.ast.type.Type;
 import japa.parser.ast.type.VoidType;
 import japa.parser.ast.type.WildcardType;
 import japa.parser.ast.visitor.VoidVisitor;
+
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.log4j.Logger;
 
 /**
  * This class dumps the AST for the CompilationUnit to a String using
@@ -844,7 +844,7 @@ public class AS3DumpVisitor implements VoidVisitor<Object>
 	@Override
 	public void visit(ArrayInitializerExpr n, Object arg)
 	{
-		//printer.print("{");
+		printer.print("[");
 		if (n.getValues() != null)
 		{
 			printer.print(" ");
@@ -859,7 +859,7 @@ public class AS3DumpVisitor implements VoidVisitor<Object>
 			}
 			printer.print(" ");
 		}
-		//printer.print("}");
+		printer.print("]");
 	}
 
 	@Override
@@ -1050,7 +1050,6 @@ public class AS3DumpVisitor implements VoidVisitor<Object>
 	{
 		// remove any non-numeric type-hinting suffixes (D,L,F, etc)
 		printNumeric(n.getValue());
-		//printer.print(n.getValue());
 	}
 
 	@Override
@@ -1512,8 +1511,8 @@ public class AS3DumpVisitor implements VoidVisitor<Object>
 	@Override
 	public void visit(ForeachStmt n, Object arg)
 	{
-		logger.error("Detected ForEach style for loop... this probably won't convert correctly. Use standard FOR statements.");
-		printer.print("for (");
+		logger.warn("Detected ForEach style for loop... this probably won't convert correctly. Use standard FOR statements.");
+		printer.print("for each (");
 		n.getVariable().accept(this, arg);
 		printer.print(" in ");
 		n.getIterable().accept(this, arg);
